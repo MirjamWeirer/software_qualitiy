@@ -44,10 +44,22 @@ public class GearBox {
         if (gear < MIN_GEAR) {
             return;
         }
-        if (rpm > UPPER_RPM_BOUND && gear < MAX_GEAR) {
+        if (rpmTooHigh(rpm) && shiftUpPossible()) {
             gear++;
-        } else if (rpm < LOWER_RPM_BOUND && gear > MIN_GEAR) {
+        } else if (shouldShiftDown(rpm)) {
             gear--;
         }
+    }
+
+    private boolean shouldShiftDown(int rpm) {
+        return rpm < LOWER_RPM_BOUND && gear > MIN_GEAR;
+    }
+
+    private boolean shiftUpPossible() {
+        return gear < MAX_GEAR;
+    }
+
+    private boolean rpmTooHigh(int rpm) {
+        return rpm > UPPER_RPM_BOUND;
     }
 }
