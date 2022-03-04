@@ -29,10 +29,10 @@ public class GearBox {
     //Einrückungen -> visuell = engl. spin (Rückgrat -> Formatierung)
     //Magic Number (2000,500,6,1) -> Hard Coded -> nicht erkennbar was die Zahlen tun -> tauchen aus dem nichts auf
     int gear = 0;
-    final int MAX_GEAR = 6;
-    final int MIN_GEAR = 1;
-    final int UPPER_RPM_BOUND = 2000;
-    final int LOWER_RPM_BOUND = 500;
+    static final int MAX_GEAR = 5;
+    static final int MIN_GEAR = 1;
+    static final int UPPER_RPM_BOUND = 2000;
+    static final int LOWER_RPM_BOUND = 500;
 
     /**
      * Automatic gear box shifting, which shifts up if the engine goes over

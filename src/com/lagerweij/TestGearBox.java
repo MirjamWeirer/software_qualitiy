@@ -5,49 +5,51 @@ import org.junit.Test;
 
 public class TestGearBox {
     @Test
-    public void testNormalRPM(){
+    public void testNoShift(){
         GearBox gearBox = new GearBox();
-        gearBox.gear = 3;
-        gearBox.shiftGear(1000);
-        Assert.assertEquals(3,gearBox.gear);
+        gearBox.gear = GearBox.MIN_GEAR + 1;
+        gearBox.shiftGear(GearBox.LOWER_RPM_BOUND);
+        Assert.assertEquals(GearBox.MIN_GEAR + 1,gearBox.gear);
+        gearBox.shiftGear(GearBox.UPPER_RPM_BOUND);
+        Assert.assertEquals(GearBox.MIN_GEAR + 1,gearBox.gear);
     }
     @Test
     public void testShiftUp(){
         GearBox gearBox = new GearBox();
-        gearBox.gear = 3;
-        gearBox.shiftGear(3000);
-        Assert.assertEquals(4,gearBox.gear);
+        gearBox.gear = GearBox.MAX_GEAR-1;
+        gearBox.shiftGear(GearBox.UPPER_RPM_BOUND+1);
+        Assert.assertEquals(GearBox.MAX_GEAR,gearBox.gear);
     }
     @Test
     public void testShiftDown(){
         GearBox gearBox = new GearBox();
-        gearBox.gear = 3;
-        gearBox.shiftGear(400);
-        Assert.assertEquals(2,gearBox.gear);
+        gearBox.gear = GearBox.MAX_GEAR;
+        gearBox.shiftGear(GearBox.LOWER_RPM_BOUND-1);
+        Assert.assertEquals(GearBox.MAX_GEAR-1,gearBox.gear);
     }
     @Test
     public void testNoShiftUpInGear6(){
         GearBox gearBox = new GearBox();
-        gearBox.gear = 6;
-        gearBox.shiftGear(3000);
-        Assert.assertEquals(6,gearBox.gear);
+        gearBox.gear = GearBox.MAX_GEAR;
+        gearBox.shiftGear(GearBox.UPPER_RPM_BOUND+1);
+        Assert.assertEquals(GearBox.MAX_GEAR,gearBox.gear);
     }
     @Test
     public void testNoShiftDownInGear1(){
         GearBox gearBox = new GearBox();
-        gearBox.gear = 1;
-        gearBox.shiftGear(400);
-        Assert.assertEquals(1,gearBox.gear);
+        gearBox.gear = GearBox.MIN_GEAR;
+        gearBox.shiftGear(GearBox.LOWER_RPM_BOUND-1);
+        Assert.assertEquals(GearBox.MIN_GEAR,gearBox.gear);
     }
     @Test
     public void testNoShiftInNeutral(){
         GearBox gearBox = new GearBox();
         gearBox.gear = 0;
 
-        gearBox.shiftGear(400);
+        gearBox.shiftGear(GearBox.LOWER_RPM_BOUND-1);
         Assert.assertEquals(0,gearBox.gear);
 
-        gearBox.shiftGear(3000);
+        gearBox.shiftGear(GearBox.UPPER_RPM_BOUND+1);
         Assert.assertEquals(0,gearBox.gear);
     }
     @Test
@@ -55,10 +57,10 @@ public class TestGearBox {
         GearBox gearBox = new GearBox();
         gearBox.gear = -1;
 
-        gearBox.shiftGear(400);
+        gearBox.shiftGear(GearBox.LOWER_RPM_BOUND-1);
         Assert.assertEquals(-1,gearBox.gear);
 
-        gearBox.shiftGear(3000);
+        gearBox.shiftGear(GearBox.UPPER_RPM_BOUND+1);
         Assert.assertEquals(-1,gearBox.gear);
     }
 }
