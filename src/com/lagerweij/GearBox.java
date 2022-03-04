@@ -40,16 +40,10 @@ public class GearBox {
         if (gear <= 0) {
             return;
         }
-        if (rpm > 2000) {
+        if (rpm > 2000 && gear < 6) {
             gear++;
-        } else if (rpm < 500) {
+        } else if (rpm < 500 && gear >1) {
             gear--;
         }
-        if (gear > 6) {
-            gear--;
-        } else if (gear < 1) {
-            gear++;
-        }
-
     }
 }
