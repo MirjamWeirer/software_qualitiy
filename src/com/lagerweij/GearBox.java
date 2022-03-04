@@ -31,23 +31,21 @@ public class GearBox {
 
 
     /**
-     *  Automatic gear box shifting, which shifts up if the engine goes over
-     *  2000 rpm, and down if it goes under 500
+     * Automatic gear box shifting, which shifts up if the engine goes over
+     * 2000 rpm, and down if it goes under 500
+     *
      * @param rpm Current revolutions per minute
      */
     public void shiftGear(int rpm) {
-        if (gear < 0) {
-            // do nothing!
-
-        } else {
-            if (gear > 0) {
-                if (rpm > 2000) {
-                    gear++;
-                } else if (rpm < 500) {
-                    gear--;
-                }
-            }
-        } if (gear > 6) {
+        if (gear <= 0) {
+            return;
+        }
+        if (rpm > 2000) {
+            gear++;
+        } else if (rpm < 500) {
+            gear--;
+        }
+        if (gear > 6) {
             gear--;
         } else if (gear < 1) {
             gear++;
