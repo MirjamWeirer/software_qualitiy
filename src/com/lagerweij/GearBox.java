@@ -25,9 +25,10 @@ package com.lagerweij;
 
 public class GearBox {
     //rpm = refquert per minutes (Umdrehung pro Minute)
-    // gear = Gang
-    private int gear = 0;
-    private int e = 0;
+    //gear = Gang
+    //Einrückungen -> visuell = engl. spin (Rückgrat -> Formatierung)
+    int gear = 0;
+    int e = 0;
 
     public void shiftGear(int rpm) {
         if (gear < 0) {
@@ -35,10 +36,11 @@ public class GearBox {
             e = rpm;
         } else {
             if (gear > 0) {
-                if (rpm > 2000)
+                if (rpm > 2000) {
                     gear++;
-            } else if (rpm < 500) {
-                gear--;
+                } else if (rpm < 500) {
+                    gear--;
+                }
             }
         } if (gear > 6) {
             gear--;
